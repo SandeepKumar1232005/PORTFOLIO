@@ -28,22 +28,32 @@ const Header = () => {
           SK<span className="dot">.</span>
         </a>
 
-        <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
+        <div className="menu-icon" onClick={() => setIsOpen(!isOpen)} style={{ zIndex: 51 }}>
           {isOpen ? <FaTimes /> : <FaBars />}
         </div>
 
-        <nav className={`nav-menu ${isOpen ? 'active' : ''}`}>
+        {/* Desktop Menu */}
+        <nav className="nav-menu desktop-menu">
           {navLinks.map((link, index) => (
-            <a 
-              key={index} 
-              href={link.href} 
-              className="nav-link"
+            <a key={index} href={link.href} className="nav-link">
+              {link.name}
+            </a>
+          ))}
+        </nav>
+
+        {/* Mobile Menu Overlay */}
+        <div className={`mobile-menu-overlay ${isOpen ? 'active' : ''}`}>
+          {navLinks.map((link, index) => (
+            <a
+              key={index}
+              href={link.href}
+              className="mobile-nav-link"
               onClick={() => setIsOpen(false)}
             >
               {link.name}
             </a>
           ))}
-        </nav>
+        </div>
       </div>
     </header>
   );
